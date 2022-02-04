@@ -80,5 +80,3 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyMysterious:InvokeServer(unpack(args))
 end)
-
-luac.out
