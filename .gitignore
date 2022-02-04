@@ -1,41 +1,82 @@
-# Compiled Lua sources
-luac.out
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Nongpun hub X Last pirate", "Ocean")
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Auto Farm")
+Section:NewToggle("Auto Farm Level", "Auto Farm Level", function(state)
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+    function checklevel()
+    LV = game:GetService("Players").LocalPlayer.PlayerStats.Level.Value
+    if LV == 1 or LV <= 140000 then
+        MON = "Bandit [Lv:5]"
+        QUESTNAME = "Bandit"
+    end
+    function checklevel()
+        LV = game:GetService("Players").LocalPlayer.PlayerStats.Level.Value
+        if LV == 15 or LV <= 140000 then
+            MON = "Pirates [Lv:15]"
+            QUESTNAME = "Pirates"
+        end
+        function checklevel()
+            LV = game:GetService("Players").LocalPlayer.PlayerStats.Level.Value
+            if LV == 30 or LV <= 140000 then
+                MON = "BagyPirates [Lv:30]"
+                QUESTNAME = "BagyPirates"
+            end
+            function checklevel()
+                LV = game:GetService("Players").LocalPlayer.PlayerStats.Level.Value
+                if LV == 60 or LV <= 140000 then
+                    MON = "Clown Pirate [Lv:60]"
+                    QUESTNAME = "Clown Pirate"
+                end
+end
+end
+end
+end
+spawn(function()
+    while true do wait()
+        checklevel()
+        if not game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.Enabled then 
+            game:GetService("ReplicatedStorage").FuncQuest:InvokeServer(QUESTNAME)
+        end
+        for i,v in pairs(game:GetService("Workspace").Lives:GetChildren()) do
+            if v.Name == MON and v.Torso.Transparency == 0.5 then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+                game:GetService'VirtualUser':CaptureController()
+                game:GetService'VirtualUser':ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end
+        end
+    end
+end)
+end)
+local Tab = Window:NewTab("Market")
+local Section = Tab:NewSection("Sword")
+Section:NewButton("Katana", "", function()
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
+local args = {
+    [1] = "Katana"
+}
 
-# Precompiled Headers
-*.gch
-*.pch
+game:GetService("ReplicatedStorage").BuySword:InvokeServer(unpack(args))
+end)
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
+Section:NewButton("Bisento", "", function()
+local args = {
+    [1] = "Bisento"
+}
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+game:GetService("ReplicatedStorage").BuySword:InvokeServer(unpack(args))
+end)
+local Section = Tab:NewSection("Haki")
+Section:NewButton("Ken Haki (ฮาคิสังเกตุ)", "", function()
+local args = {
+    [1] = "KenHaki",
+    [2] = true
+}
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
+game:GetService("ReplicatedStorage").BuyMysterious:InvokeServer(unpack(args))
+end)
